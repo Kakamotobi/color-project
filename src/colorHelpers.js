@@ -15,7 +15,9 @@ function generatePalette(starterPalette) {
 	}
 
 	for (let color of starterPalette.colors) {
+		// Create scale of 10 shades for each color (in hex)
 		let scale = generateScale(color.color, 10).reverse();
+		// Place each shade to its corresponding shade level (50, 100, ... 900) along with other information as an object
 		for (let i in scale) {
 			newPalette.colors[levels[i]].push({
 				name: `${color.name} ${levels[i]}`,
@@ -34,14 +36,14 @@ function generatePalette(starterPalette) {
 }
 
 // Generate a range of colors
-// An array with three color values (ex: [darkhex, hex, white])
+// An array with three color values (ex: [darkhex, hex, white]) that we're going to make a scale of.
 function getRange(hexColor) {
 	const end = "#fff";
 	return [chroma(hexColor).darken(1.4).hex(), hexColor, end];
 }
 
 // Generate a scale
-// Gives us 10 colors based off of an input color
+// Gives us an object of 10 colors based off of an input color
 function generateScale(hexColor, numberOfColors) {
 	return chroma.scale(getRange(hexColor)).mode("lab").colors(numberOfColors);
 }
