@@ -5,7 +5,7 @@ import MiniPalette from "./MiniPalette.js";
 
 const styles = {
 	PaletteList: {
-		height: "100%",
+		height: "100vh",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "flex-start",
