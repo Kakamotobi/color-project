@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar.js";
 import ColorBox from "./ColorBox.js";
 import PaletteFooter from "./PaletteFooter.js";
@@ -32,11 +33,11 @@ class SingleColorPalette extends Component {
 
 	render() {
 		const { format } = this.state;
-		const { paletteName, emoji } = this.props.palette;
+		const { id, paletteName, emoji } = this.props.palette;
 
 		const colorBoxes = this._shades.map((color) => (
 			<ColorBox
-				key={color.id}
+				key={color.name}
 				name={color.name}
 				background={color[format]}
 				showLink={false}
@@ -44,9 +45,19 @@ class SingleColorPalette extends Component {
 		));
 
 		return (
-			<div className="Palette">
+			<div className="SingleColorPalette Palette">
 				<Navbar changeFormat={this.changeFormat} showingAllColors={false} />
-				<div className="Palette__colors">{colorBoxes}</div>
+				<div className="Palette__colors">
+					{colorBoxes}
+					<div className="SingleColorPalette__go-back ColorBox">
+						<Link
+							className="SingleColorPalette__go-back-btn"
+							to={`/palette/${id}`}
+						>
+							Go Back
+						</Link>
+					</div>
+				</div>
 				<PaletteFooter paletteName={paletteName} emoji={emoji} />
 			</div>
 		);

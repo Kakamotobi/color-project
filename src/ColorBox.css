@@ -9,7 +9,16 @@
 	cursor: pointer;
 }
 
-.ColorBox__copy-btn {
+.SingleColorPalette .ColorBox {
+	height: 50%;
+}
+
+.SingleColorPalette__go-back.ColorBox {
+	background-color: #000;
+}
+
+.ColorBox__copy-btn,
+.SingleColorPalette__go-back-btn {
 	width: 100px;
 	height: 30px;
 	margin-left: -50px;
@@ -23,11 +32,15 @@
 	outline: none;
 	color: white;
 	font-size: 1rem;
+	text-decoration: none;
 	text-align: center;
 	line-height: 30px;
 	text-transform: uppercase;
-	opacity: 0;
 	cursor: pointer;
+}
+
+.ColorBox__copy-btn {
+	opacity: 0;
 }
 
 .ColorBox:hover .ColorBox__copy-btn {
