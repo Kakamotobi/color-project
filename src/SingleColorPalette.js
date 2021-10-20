@@ -19,7 +19,7 @@ class SingleColorPalette extends Component {
 		let shades = [];
 		let allColors = palette.colors;
 		for (let key in allColors) {
-			shades = shades.push(
+			shades = shades.concat(
 				allColors[key].filter((color) => color.id === colorToFilterBy)
 			);
 		}

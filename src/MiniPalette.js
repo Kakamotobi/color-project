@@ -8,7 +8,6 @@ const styles = {
 		backgroundColor: "#fff",
 		border: "1px solid #000",
 		borderRadius: "5px",
-		overflow: "hidden",
 		"&:hover": {
 			cursor: "pointer",
 		},
