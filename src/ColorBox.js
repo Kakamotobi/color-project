@@ -30,6 +30,17 @@ const styles = {
 				? "white"
 				: "rgba(0,0,0,0.5)",
 	},
+	boxContent: {
+		width: "100%",
+		padding: "10px",
+		boxSizing: "border-box",
+		position: "absolute",
+		left: "0",
+		bottom: "0",
+		color: "black",
+		fontSize: "12px",
+		textTransform: "uppercase",
+	},
 	copyButton: {
 		color: (props) =>
 			chroma(props.background).luminance() >= 0.7 ? "rgba(0,0,0,0.5)" : "white",
@@ -67,6 +78,55 @@ const styles = {
 		lineHeight: "30px",
 		textTransform: "uppercase",
 	},
+	copyOverlay: {
+		width: "100%",
+		height: "100%",
+		opacity: "0",
+		zIndex: "50",
+		transform: "scale(0.1)",
+	},
+	showOverlay: {
+		position: "absolute",
+		opacity: "1",
+		zIndex: "10",
+		transform: "scale(10)",
+		transition: "all 600ms ease-in-out",
+	},
+	copyMessage: {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		position: "fixed",
+		top: "0",
+		bottom: "0",
+		left: "0",
+		right: "0",
+		color: "white",
+		fontSize: "4rem",
+		opacity: "0",
+		transform: "scale(0.1)",
+		"& h1": {
+			width: "100%",
+			marginBottom: "0",
+			padding: "1rem",
+			background: "rgba(255, 255, 255, 0.3)",
+			fontWeight: "400",
+			textAlign: "center",
+			textShadow: "1px 2px black",
+			textTransform: "uppercase",
+		},
+		"& p": {
+			fontSize: "2rem",
+			fontWeight: "100",
+		},
+	},
+	showCopyMessage: {
+		opacity: "1",
+		zIndex: "25",
+		transform: "scale(1)",
+		transition: "all 400ms ease-in-out 300ms",
+	},
 };
 
 class ColorBox extends Component {
@@ -103,15 +163,21 @@ class ColorBox extends Component {
 					onClick={this.changeCopyState}
 				>
 					<div
-						className={`ColorBox__copy-overlay ${copied && "show"}`}
+						className={`${classes.copyOverlay} ${
+							copied && classes.showOverlay
+						}`}
 						style={{ background: background }}
 					/>
-					<div className={`ColorBox__copy-msg ${copied && "show"}`}>
+					<div
+						className={`${classes.copyMessage} ${
+							copied && classes.showCopyMessage
+						}`}
+					>
 						<h1>Copied!</h1>
 						<p className={classes.copyText}>{background}</p>
 					</div>
-					<div className="ColorBox__copy-container">
-						<div className="ColorBox__box-content">
+					<div>
+						<div className={classes.boxContent}>
 							<span className={classes.colorName}>{name}</span>
 						</div>
 						<button className={classes.copyButton}>Copy</button>
