@@ -1,24 +1,23 @@
-.Palette {
+/* .Palette {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
-	
-}
+} */
 
-.Palette__colors {
+/* .Palette__colors {
 	height: 90%;
-}
+} */
 
-.Palette__footer {
+/* .Palette__footer {
 	height: 5vh;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	background-color: #fff;
 	font-weight: bold;
-}
+} */
 
-.Palette__footer__emoji {
+/* .Palette__footer__emoji {
 	margin: 0 1rem;
 	font-size: 1.5rem;
-}
+} */
