@@ -3,18 +3,7 @@ import { withStyles } from "@mui/styles";
 import Navbar from "./Navbar.js";
 import ColorBox from "./ColorBox.js";
 import PaletteFooter from "./PaletteFooter.js";
-import "./Palette.css";
-
-const styles = {
-	Palette: {
-		height: "100vh",
-		display: "flex",
-		flexDirection: "column",
-	},
-	colors: {
-		height: "90%",
-	},
-};
+import styles from "./styles/PaletteStyles.js"
 
 class Palette extends Component {
 	constructor(props) {
