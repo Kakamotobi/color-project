@@ -13,11 +13,15 @@ const styles = {
 		alignItems: "flex-start",
 		flexWrap: "wrap",
 	},
-	header: {
+	nav: {
 		width: "100%",
 		display: "flex",
 		justifyContent: "space-between",
+		alignItems: "center",
 		color: "#fff",
+		"& a": {
+			color: "#fff",
+		},
 	},
 	palettes: {
 		width: "100%",

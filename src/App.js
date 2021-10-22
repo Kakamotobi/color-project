@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
+import NewPaletteForm from "./NewPaletteForm.js";
 import PaletteList from "./PaletteList.js";
 import Palette from "./Palette.js";
 import SingleColorPalette from "./SingleColorPalette.js";
@@ -15,7 +16,7 @@ class App extends Component {
 	render() {
 		return (
 			<Switch>
-				{/* Pass through all of the palettes to PaletteList */}
+				<Route exact path="/palette/new" render={() => <NewPaletteForm />} />
 				<Route
 					exact
 					path="/"
