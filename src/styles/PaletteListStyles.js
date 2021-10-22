@@ -4,22 +4,22 @@ const styles = {
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "flex-start",
-		backgroundColor: "blue",
+		backgroundColor: "royalblue",
 	},
-	PaletteList__container: {
+	container: {
 		width: "50%",
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "flex-start",
-		flexWrap: "flex-wrap",
+		flexWrap: "wrap",
 	},
-	PaletteList__header: {
+	header: {
 		width: "100%",
 		display: "flex",
 		justifyContent: "space-between",
 		color: "#fff",
 	},
-	PaletteList__palettes: {
+	palettes: {
 		width: "100%",
 		display: "grid",
 		gridTemplateColumns: "repeat(3, 30%)",

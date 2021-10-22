@@ -13,11 +13,11 @@ class PaletteList extends Component {
 
 		return (
 			<div className={classes.PaletteList}>
-				<div className={classes.PaletteList__container}>
-					<nav className={classes.PaletteList__header}>
+				<div className={classes.container}>
+					<nav className={classes.header}>
 						<h1>React Colors</h1>
 					</nav>
-					<div className={classes.PaletteList__palettes}>
+					<div className={classes.palettes}>
 						{palettes.map((palette) => (
 							<MiniPalette
 								{...palette}
