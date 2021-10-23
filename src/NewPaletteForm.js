@@ -10,8 +10,10 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import Button from "@mui/material/Button";
+import { ChromePicker } from "react-color";
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 	({ theme, open }) => ({
@@ -107,24 +109,25 @@ function NewPaletteForm() {
 					</IconButton>
 				</DrawerHeader>
 				<Divider />
+				<Typography variant="h4">Design Your Palette</Typography>
+				<div>
+					<Button variant="contained" color="secondary">
+						Clear Palette
+					</Button>
+					<Button variant="contained" color="primary">
+						Random Color
+					</Button>
+				</div>
+				<ChromePicker
+					color="purple"
+					onChangeComplete={(newColor) => console.log(newColor)}
+				/>
+				<Button variant="contained" color="primary">
+					Add Color
+				</Button>
 			</Drawer>
 			<Main open={open}>
 				<DrawerHeader />
-				<Typography paragraph>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-					dolor purus non enim praesent elementum facilisis leo vel. Risus at
-					ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-					quisque non tellus. Convallis convallis tellus id interdum velit
-					laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-					adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-					integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-					eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-					quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-					vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-					lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-					faucibus et molestie ac.
-				</Typography>
 			</Main>
 		</Box>
 	);
