@@ -12,6 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Button from "@mui/material/Button";
 import { ChromePicker } from "react-color";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import DraggableColorBox from "./DraggableColorBox.js";
 
 const drawerWidth = 400;
@@ -65,14 +66,26 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 function NewPaletteForm() {
 	const [open, setOpen] = React.useState(false);
 	const [currColor, updateCurrColor] = React.useState("teal");
-	const [colors, addNewColor] = React.useState(["purple", "yellow", "pink"]);
+	const [colors, addNewColor] = React.useState([
+		{ color: "blue", name: "normal blue" },
+	]);
+	const [newName, updateNewName] = React.useState("");
 
 	const handleUpdateCurrColor = (newColor) => {
 		updateCurrColor(newColor.hex);
 	};
 
 	const handleAddNewColor = () => {
-		addNewColor([...colors, currColor]);
+		const newColor = {
+			color: currColor,
+			name: newName,
+		};
+		addNewColor([...colors, newColor]);
+		updateNewName("");
+	};
+
+	const handleChange = (evt) => {
+		updateNewName(evt.target.value);
 	};
 
 	const handleDrawerOpen = () => {
@@ -82,6 +95,17 @@ function NewPaletteForm() {
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
+
+	React.useEffect(() => {
+		ValidatorForm.addValidationRule("isColorUnique", () => {
+			return colors.every((color) => color.color !== currColor);
+		});
+		ValidatorForm.addValidationRule("isColorNameUnique", (value) => {
+			return colors.every(
+				(color) => color.name.toLowerCase() !== value.toLowerCase()
+			);
+		});
+	});
 
 	return (
 		<Box sx={{ display: "flex" }}>
@@ -134,19 +158,31 @@ function NewPaletteForm() {
 					color={currColor}
 					onChangeComplete={handleUpdateCurrColor}
 				/>
-				<Button
-					variant="contained"
-					color="primary"
-					style={{ backgroundColor: currColor }}
-					onClick={handleAddNewColor}
-				>
-					Add Color
-				</Button>
+				<ValidatorForm onSubmit={handleAddNewColor}>
+					<TextValidator
+						value={newName}
+						onChange={handleChange}
+						validators={["required", "isColorUnique", "isColorNameUnique"]}
+						errorMessages={[
+							"Enter a color name",
+							"Color already used",
+							"Color name must be unique",
+						]}
+					/>
+					<Button
+						type="submit"
+						variant="contained"
+						color="primary"
+						style={{ backgroundColor: currColor }}
+					>
+						Add Color
+					</Button>
+				</ValidatorForm>
 			</Drawer>
 			<Main open={open}>
 				<DrawerHeader />
 				{colors.map((color) => (
-					<DraggableColorBox color={color} />
+					<DraggableColorBox color={color.color} name={color.name} />
 				))}
 			</Main>
 		</Box>
