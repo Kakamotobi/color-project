@@ -12,11 +12,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Button from "@mui/material/Button";
 import { ChromePicker } from "react-color";
+import DraggableColorBox from "./DraggableColorBox.js";
 
 const drawerWidth = 400;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 	({ theme, open }) => ({
+		height: "calc(100vh - 64px)",
 		flexGrow: 1,
 		padding: theme.spacing(3),
 		transition: theme.transitions.create("margin", {
@@ -143,11 +145,9 @@ function NewPaletteForm() {
 			</Drawer>
 			<Main open={open}>
 				<DrawerHeader />
-				<ul>
-					{colors.map((color) => (
-						<li style={{ backgroundColor: color }}>{color}</li>
-					))}
-				</ul>
+				{colors.map((color) => (
+					<DraggableColorBox color={color} />
+				))}
 			</Main>
 		</Box>
 	);
