@@ -63,8 +63,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 	justifyContent: "flex-end",
 }));
 
-function NewPaletteForm() {
-	const [open, setOpen] = React.useState(false);
+function NewPaletteForm(props) {
+	const [open, setOpen] = React.useState(true);
 	const [currColor, updateCurrColor] = React.useState("teal");
 	const [colors, addNewColor] = React.useState([
 		{ color: "blue", name: "normal blue" },
@@ -96,6 +96,17 @@ function NewPaletteForm() {
 		setOpen(false);
 	};
 
+	const handleSavePalette = () => {
+		let name = "New Test Palette";
+		const newPalette = {
+			paletteName: name,
+			id: name.toLowerCase().replace(/ /g, "-"),
+			colors: colors,
+		};
+		props.savePalette(newPalette);
+		props.history.push("/");
+	};
+
 	React.useEffect(() => {
 		ValidatorForm.addValidationRule("isColorUnique", () => {
 			return colors.every((color) => color.color !== currColor);
@@ -110,7 +121,7 @@ function NewPaletteForm() {
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
-			<AppBar position="fixed" open={open}>
+			<AppBar position="fixed" open={open} color="default">
 				<Toolbar>
 					<IconButton
 						color="inherit"
@@ -124,6 +135,13 @@ function NewPaletteForm() {
 					<Typography variant="h6" noWrap component="div">
 						Persistent drawer
 					</Typography>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={handleSavePalette}
+					>
+						Save Palette
+					</Button>
 				</Toolbar>
 			</AppBar>
 			<Drawer
