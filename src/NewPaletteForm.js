@@ -13,7 +13,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Button from "@mui/material/Button";
 import { ChromePicker } from "react-color";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import DraggableColorBox from "./DraggableColorBox.js";
+import { arrayMoveImmutable } from "array-move";
+import DraggableColorList from "./DraggableColorList";
 
 const drawerWidth = 400;
 
@@ -69,7 +70,6 @@ function NewPaletteForm(props) {
 	const [colors, updateColors] = React.useState([
 		{ color: "blue", name: "normal blue" },
 	]);
-
 	const [newNames, setName] = React.useState({
 		newColorName: "",
 		newPaletteName: "",
@@ -113,6 +113,10 @@ function NewPaletteForm(props) {
 
 	const removeColor = (colorName) => {
 		updateColors(colors.filter((color) => color.name !== colorName));
+	};
+
+	const onSortEnd = ({ oldIndex, newIndex }) => {
+		updateColors(arrayMoveImmutable(colors, oldIndex, newIndex));
 	};
 
 	React.useEffect(() => {
@@ -219,14 +223,12 @@ function NewPaletteForm(props) {
 			</Drawer>
 			<Main open={open}>
 				<DrawerHeader />
-				{colors.map((color) => (
-					<DraggableColorBox
-						key={color.name}
-						color={color.color}
-						name={color.name}
-						removeColor={removeColor}
-					/>
-				))}
+				<DraggableColorList
+					colors={colors}
+					removeColor={removeColor}
+					axis="xy"
+					onSortEnd={onSortEnd}
+				/>
 			</Main>
 		</Box>
 	);
