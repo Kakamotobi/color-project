@@ -1,5 +1,7 @@
 import React from "react";
-import { withStyles } from "@mui/styles";
+import { withStyles, withThemeCreator } from "@mui/styles";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { scale } from "chroma-js";
 
 const styles = {
 	root: {
@@ -11,16 +13,37 @@ const styles = {
 		position: "relative",
 		boxSizing: "border-box",
 		cursor: "grab",
+		"&:hover svg": {
+			color: "white",
+			transform: "scale(1.5)",
+		},
+	},
+	boxContent: {
+		width: "100%",
+		padding: "10px",
+		display: "flex",
+		justifyContent: "space-between",
+		boxSizing: "border-box",
+		position: "absolute",
+		left: "0",
+		bottom: "0",
+		color: "rgba(0,0,0,0.5)",
+		fontSize: "12px",
+		textTransform: "uppercase",
+	},
+	deleteIcon: {
+		transition: "all 300ms ease-in-out",
 	},
 };
 
 function DraggableColorBox(props) {
+	const { classes } = props;
 	return (
-		<div
-			className={props.classes.root}
-			style={{ backgroundColor: props.color }}
-		>
-			{props.name}
+		<div className={classes.root} style={{ backgroundColor: props.color }}>
+			<div className={classes.boxContent}>
+				<span>{props.name}</span>
+				<DeleteIcon className={classes.deleteIcon} />
+			</div>
 		</div>
 	);
 }
