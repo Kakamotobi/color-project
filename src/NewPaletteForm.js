@@ -66,11 +66,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 function NewPaletteForm(props) {
 	const [open, setOpen] = React.useState(true);
 	const [currColor, updateCurrColor] = React.useState("teal");
-	const [colors, addNewColor] = React.useState([
+	const [colors, updateColors] = React.useState([
 		{ color: "blue", name: "normal blue" },
 	]);
-	// const [newColorName, updateNewColorName] = React.useState("");
-	// const [newPaletteName, updateNewPaletteName] = React.useState("");
 
 	const [newNames, setName] = React.useState({
 		newColorName: "",
@@ -90,8 +88,8 @@ function NewPaletteForm(props) {
 			color: currColor,
 			name: newNames.newColorName,
 		};
-		addNewColor([...colors, newColor]);
-		// updateNewColorName("");
+		updateColors([...colors, newColor]);
+		setName({ ...newNames, colorName: "" });
 	};
 
 	const handleDrawerOpen = () => {
@@ -111,6 +109,10 @@ function NewPaletteForm(props) {
 		};
 		props.savePalette(newPalette);
 		props.history.push("/");
+	};
+
+	const removeColor = (colorName) => {
+		updateColors(colors.filter((color) => color.name !== colorName));
 	};
 
 	React.useEffect(() => {
@@ -218,7 +220,12 @@ function NewPaletteForm(props) {
 			<Main open={open}>
 				<DrawerHeader />
 				{colors.map((color) => (
-					<DraggableColorBox color={color.color} name={color.name} />
+					<DraggableColorBox
+						key={color.name}
+						color={color.color}
+						name={color.name}
+						removeColor={removeColor}
+					/>
 				))}
 			</Main>
 		</Box>
