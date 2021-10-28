@@ -2,19 +2,17 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Button from "@mui/material/Button";
 import { ChromePicker } from "react-color";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { arrayMoveImmutable } from "array-move";
 import DraggableColorList from "./DraggableColorList";
+import NewPaletteFormNav from "./NewPaletteFormNav.js";
 
 const drawerWidth = 400;
 
@@ -150,36 +148,14 @@ function NewPaletteForm(props) {
 
 	return (
 		<Box sx={{ display: "flex" }}>
-			<CssBaseline />
-			<AppBar position="fixed" open={open} color="default">
-				<Toolbar>
-					<IconButton
-						color="inherit"
-						aria-label="open drawer"
-						onClick={handleDrawerOpen}
-						edge="start"
-						sx={{ mr: 2, ...(open && { display: "none" }) }}
-					>
-						<MenuIcon />
-					</IconButton>
-					<Typography variant="h6" noWrap component="div">
-						Persistent drawer
-					</Typography>
-					<ValidatorForm onSubmit={handleSavePalette}>
-						<TextValidator
-							label="Palette Name"
-							name="newPaletteName"
-							value={newNames.newPaletteName}
-							onChange={handleChange}
-							validators={["required", "isPaletteNameUnique"]}
-							errorMessages={["Enter palette name", "Name already used"]}
-						/>
-						<Button type="submit" variant="contained" color="primary">
-							Save Palette
-						</Button>
-					</ValidatorForm>
-				</Toolbar>
-			</AppBar>
+			<NewPaletteFormNav
+				AppBar={AppBar}
+				open={open}
+				newNames={newNames}
+				handleDrawerOpen={handleDrawerOpen}
+				handleSavePalette={handleSavePalette}
+				handleChange={handleChange}
+			/>
 			<Drawer
 				sx={{
 					width: drawerWidth,
