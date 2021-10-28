@@ -2,13 +2,11 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import MuiAppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Button from "@mui/material/Button";
-import { ValidatorForm } from "react-material-ui-form-validator";
 import { arrayMoveImmutable } from "array-move";
 import DraggableColorList from "./DraggableColorList";
 import NewPaletteFormNav from "./NewPaletteFormNav.js";
@@ -36,23 +34,6 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 	})
 );
 
-const AppBar = styled(MuiAppBar, {
-	shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-	transition: theme.transitions.create(["margin", "width"], {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.leavingScreen,
-	}),
-	...(open && {
-		width: `calc(100% - ${drawerWidth}px)`,
-		marginLeft: `${drawerWidth}px`,
-		transition: theme.transitions.create(["margin", "width"], {
-			easing: theme.transitions.easing.easeOut,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	}),
-}));
-
 const DrawerHeader = styled("div")(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
@@ -66,13 +47,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 function NewPaletteForm(props) {
 	const [open, setOpen] = React.useState(true);
 	const [colors, updateColors] = React.useState(props.palettes[0].colors);
-	const [newPaletteName, updatePaletteName] = React.useState("");
 
 	const paletteIsFull = colors.length >= props.maxColors;
-
-	const handleChange = (evt) => {
-		updatePaletteName({ [evt.target.name]: evt.target.value });
-	};
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -86,17 +62,6 @@ function NewPaletteForm(props) {
 		updateColors([...colors, newColor]);
 	};
 
-	const handleSavePalette = () => {
-		let name = newPaletteName;
-		const newPalette = {
-			paletteName: name,
-			id: name.toLowerCase().replace(/ /g, "-"),
-			colors: colors,
-		};
-		props.savePalette(newPalette);
-		props.history.push("/");
-	};
-
 	const removeColor = (colorName) => {
 		updateColors(colors.filter((color) => color.name !== colorName));
 	};
@@ -108,6 +73,16 @@ function NewPaletteForm(props) {
 		updateColors([...colors, randColor]);
 	};
 
+	const savePalette = (newPaletteName) => {
+		const newPalette = {
+			paletteName: newPaletteName,
+			id: newPaletteName.toLowerCase().replace(/ /g, "-"),
+			colors: colors,
+		};
+		props.savePalette(newPalette);
+		props.history.push("/");
+	};
+
 	const clearPalette = () => {
 		updateColors([]);
 	};
@@ -116,23 +91,15 @@ function NewPaletteForm(props) {
 		updateColors(arrayMoveImmutable(colors, oldIndex, newIndex));
 	};
 
-	React.useEffect(() => {
-		ValidatorForm.addValidationRule("isPaletteNameUnique", (value) => {
-			return props.palettes.every(
-				(palette) => palette.paletteName.toLowerCase() !== value.toLowerCase()
-			);
-		});
-	});
-
 	return (
 		<Box sx={{ display: "flex" }}>
 			<NewPaletteFormNav
-				AppBar={AppBar}
+				drawerWidth={drawerWidth}
+				colors={colors}
+				palettes={props.palettes}
 				open={open}
-				newPaletteName={newPaletteName}
 				handleDrawerOpen={handleDrawerOpen}
-				handleSavePalette={handleSavePalette}
-				handleChange={handleChange}
+				savePalette={savePalette}
 			/>
 			<Drawer
 				sx={{
