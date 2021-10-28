@@ -17,7 +17,7 @@ class NewPaletteFormNav extends Component {
 		const {
 			AppBar,
 			open,
-			newNames,
+			newPaletteName,
 			handleDrawerOpen,
 			handleSavePalette,
 			handleChange,
@@ -45,7 +45,7 @@ class NewPaletteFormNav extends Component {
 							<TextValidator
 								label="Palette Name"
 								name="newPaletteName"
-								value={newNames.newPaletteName}
+								value={newPaletteName}
 								onChange={handleChange}
 								validators={["required", "isPaletteNameUnique"]}
 								errorMessages={["Enter palette name", "Name already used"]}
