@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import { withStyles } from "@mui/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import MuiAppBar from "@mui/material/AppBar";
@@ -10,6 +11,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
+const styles = {
+	root: {
+		display: "flex",
+	},
+	navBtns: {},
+};
+
 const AppBar = styled(MuiAppBar, {
 	shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open, drawerWidth }) => ({
@@ -17,6 +25,9 @@ const AppBar = styled(MuiAppBar, {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.leavingScreen,
 	}),
+	height: "64px",
+	flexDirection: "row",
+	justifyContent: "space-between",
 	...(open && {
 		width: `calc(100% - ${drawerWidth}px)`,
 		marginLeft: `${drawerWidth}px`,
@@ -27,6 +38,7 @@ const AppBar = styled(MuiAppBar, {
 	}),
 }));
 
+// NewPaletteFormNav Component
 function NewPaletteFormNav(props) {
 	const [newPaletteName, updatePaletteName] = React.useState("");
 
@@ -46,8 +58,10 @@ function NewPaletteFormNav(props) {
 		});
 	});
 
+	const { classes } = props;
+
 	return (
-		<div>
+		<div className={classes.root}>
 			{" "}
 			<CssBaseline />
 			<AppBar
@@ -67,8 +81,10 @@ function NewPaletteFormNav(props) {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" noWrap component="div">
-						Persistent drawer
+						Create A Palette
 					</Typography>
+				</Toolbar>
+				<div className={classes.navBtns}>
 					<ValidatorForm onSubmit={handleSavePalette}>
 						<TextValidator
 							label="Palette Name"
@@ -87,10 +103,10 @@ function NewPaletteFormNav(props) {
 							Go Back
 						</Button>
 					</Link>
-				</Toolbar>
+				</div>
 			</AppBar>
 		</div>
 	);
 }
 
-export default NewPaletteFormNav;
+export default withStyles(styles)(NewPaletteFormNav);
