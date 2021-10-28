@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import PaletteMetaForm from "./PaletteMetaForm.js";
 
 const styles = {
 	root: {
@@ -40,24 +40,6 @@ const AppBar = styled(MuiAppBar, {
 
 // NewPaletteFormNav Component
 function NewPaletteFormNav(props) {
-	const [newPaletteName, updatePaletteName] = React.useState("");
-
-	const handleChange = (evt) => {
-		updatePaletteName(evt.target.value);
-	};
-
-	const handleSavePalette = () => {
-		props.savePalette(newPaletteName);
-	};
-
-	React.useEffect(() => {
-		ValidatorForm.addValidationRule("isPaletteNameUnique", (value) => {
-			return props.palettes.every(
-				(palette) => palette.paletteName.toLowerCase() !== value.toLowerCase()
-			);
-		});
-	});
-
 	const { classes } = props;
 
 	return (
@@ -85,19 +67,10 @@ function NewPaletteFormNav(props) {
 					</Typography>
 				</Toolbar>
 				<div className={classes.navBtns}>
-					<ValidatorForm onSubmit={handleSavePalette}>
-						<TextValidator
-							label="Palette Name"
-							name="newPaletteName"
-							value={newPaletteName}
-							onChange={handleChange}
-							validators={["required", "isPaletteNameUnique"]}
-							errorMessages={["Enter palette name", "Name already used"]}
-						/>
-						<Button type="submit" variant="contained" color="primary">
-							Save Palette
-						</Button>
-					</ValidatorForm>
+					<PaletteMetaForm
+						palettes={props.palettes}
+						savePalette={props.savePalette}
+					/>
 					<Link to="/">
 						<Button variant="contained" color="secondary">
 							Go Back
