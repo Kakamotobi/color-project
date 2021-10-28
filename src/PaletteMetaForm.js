@@ -19,9 +19,9 @@ function PaletteMetaForm(props) {
 		props.savePalette(newPaletteName);
 	};
 
-	const handleClickOpen = () => {
-		setOpen(true);
-	};
+	// const handleClickOpen = () => {
+	// 	setOpen(true);
+	// };
 
 	const handleClose = () => {
 		setOpen(false);
@@ -36,37 +36,32 @@ function PaletteMetaForm(props) {
 	});
 
 	return (
-		<div>
-			<Button variant="outlined" onClick={handleClickOpen}>
-				Open form dialog
-			</Button>
-			<Dialog open={open} onClose={handleClose}>
-				<DialogTitle>Subscribe</DialogTitle>
+		<Dialog open={open} onClose={handleClose}>
+			<DialogTitle>Choose a Palette Name</DialogTitle>
+			<ValidatorForm onSubmit={handleSavePalette}>
 				<DialogContent>
 					<DialogContentText>
-						To subscribe to this website, please enter your email address here.
-						We will send updates occasionally.
+						Please enter a name for your new palette. Make sure it's unique!
 					</DialogContentText>
-					<ValidatorForm onSubmit={handleSavePalette}>
-						<TextValidator
-							label="Palette Name"
-							name="newPaletteName"
-							value={newPaletteName}
-							onChange={handleChange}
-							validators={["required", "isPaletteNameUnique"]}
-							errorMessages={["Enter palette name", "Name already used"]}
-						/>
-						<Button type="submit" variant="contained" color="primary">
-							Save Palette
-						</Button>
-					</ValidatorForm>
+					<TextValidator
+						label="Palette Name"
+						name="newPaletteName"
+						value={newPaletteName}
+						onChange={handleChange}
+						validators={["required", "isPaletteNameUnique"]}
+						errorMessages={["Enter palette name", "Name already used"]}
+						fullWidth
+						margin="normal"
+					/>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose}>Cancel</Button>
-					<Button onClick={handleClose}>Subscribe</Button>
+					<Button type="submit" variant="contained" color="primary">
+						Save Palette
+					</Button>
 				</DialogActions>
-			</Dialog>
-		</div>
+			</ValidatorForm>
+		</Dialog>
 	);
 }
 

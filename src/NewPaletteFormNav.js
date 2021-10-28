@@ -15,7 +15,15 @@ const styles = {
 	root: {
 		display: "flex",
 	},
-	navBtns: {},
+	navBtns: {
+		marginRight: "1rem",
+		"& a": {
+			textDecoration: "none",
+		},
+	},
+	button: {
+		margin: "0 0.5rem !important",
+	},
 };
 
 const AppBar = styled(MuiAppBar, {
@@ -28,6 +36,7 @@ const AppBar = styled(MuiAppBar, {
 	height: "64px",
 	flexDirection: "row",
 	justifyContent: "space-between",
+	alignItems: "center",
 	...(open && {
 		width: `calc(100% - ${drawerWidth}px)`,
 		marginLeft: `${drawerWidth}px`,
@@ -40,6 +49,13 @@ const AppBar = styled(MuiAppBar, {
 
 // NewPaletteFormNav Component
 function NewPaletteFormNav(props) {
+	const [paletteMetaFormShowing, togglePaletteMetaFormShowing] =
+		React.useState(true);
+
+	const showPaletteMetaForm = () => {
+		togglePaletteMetaFormShowing(true);
+	};
+
 	const { classes } = props;
 
 	return (
@@ -67,17 +83,30 @@ function NewPaletteFormNav(props) {
 					</Typography>
 				</Toolbar>
 				<div className={classes.navBtns}>
-					<PaletteMetaForm
-						palettes={props.palettes}
-						savePalette={props.savePalette}
-					/>
 					<Link to="/">
-						<Button variant="contained" color="secondary">
+						<Button
+							className={classes.button}
+							variant="contained"
+							color="secondary"
+						>
 							Go Back
 						</Button>
 					</Link>
+					<Button
+						className={classes.button}
+						variant="contained"
+						onClick={showPaletteMetaForm}
+					>
+						Save{" "}
+					</Button>
 				</div>
 			</AppBar>
+			{paletteMetaFormShowing && (
+				<PaletteMetaForm
+					palettes={props.palettes}
+					savePalette={props.savePalette}
+				/>
+			)}
 		</div>
 	);
 }
