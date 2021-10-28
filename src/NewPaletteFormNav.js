@@ -50,10 +50,14 @@ const AppBar = styled(MuiAppBar, {
 // NewPaletteFormNav Component
 function NewPaletteFormNav(props) {
 	const [paletteMetaFormShowing, togglePaletteMetaFormShowing] =
-		React.useState(true);
+		React.useState(false);
 
 	const showPaletteMetaForm = () => {
 		togglePaletteMetaFormShowing(true);
+	};
+
+	const closePaletteMetaForm = () => {
+		togglePaletteMetaFormShowing(false);
 	};
 
 	const { classes } = props;
@@ -105,6 +109,8 @@ function NewPaletteFormNav(props) {
 				<PaletteMetaForm
 					palettes={props.palettes}
 					savePalette={props.savePalette}
+					paletteMetaFormShowing={paletteMetaFormShowing}
+					closePaletteMetaForm={closePaletteMetaForm}
 				/>
 			)}
 		</div>
