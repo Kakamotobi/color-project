@@ -92,7 +92,7 @@ function NewPaletteForm(props) {
 				anchor="left"
 				open={open}
 			>
-				<DrawerHeader sx={{ marginLeft: "auto" }}>
+				<DrawerHeader>
 					<IconButton onClick={handleDrawerClose}>
 						<ChevronLeftIcon />
 					</IconButton>
