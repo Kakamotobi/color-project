@@ -1,51 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { styled } from "@mui/material/styles";
 import { withStyles } from "@mui/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
-import MuiAppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import PaletteMetaForm from "./PaletteMetaForm.js";
-
-const styles = {
-	root: {
-		display: "flex",
-	},
-	navBtns: {
-		marginRight: "1rem",
-		"& a": {
-			textDecoration: "none",
-		},
-	},
-	button: {
-		margin: "0 0.5rem !important",
-	},
-};
-
-const AppBar = styled(MuiAppBar, {
-	shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open, drawerWidth }) => ({
-	transition: theme.transitions.create(["margin", "width"], {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.leavingScreen,
-	}),
-	height: "64px",
-	flexDirection: "row",
-	justifyContent: "space-between",
-	alignItems: "center",
-	...(open && {
-		width: `calc(100% - ${drawerWidth}px)`,
-		marginLeft: `${drawerWidth}px`,
-		transition: theme.transitions.create(["margin", "width"], {
-			easing: theme.transitions.easing.easeOut,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	}),
-}));
+import { styles, AppBar } from "./styles/NewPaletteFormNavStyles.js";
 
 // NewPaletteFormNav Component
 function NewPaletteFormNav(props) {
