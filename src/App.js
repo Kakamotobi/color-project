@@ -17,18 +17,28 @@ class App extends Component {
 			palettes: savedPalettes || seedColors,
 		};
 
-		this.findStarterPalette = this.findStarterPalette.bind(this);
+		this.findPalette = this.findPalette.bind(this);
 		this.savePalette = this.savePalette.bind(this);
+		this.deletePalette = this.deletePalette.bind(this);
 	}
 
 	// Find starter palette using the id passed in the URL
-	findStarterPalette(id) {
+	findPalette(id) {
 		return this.state.palettes.find((palette) => palette.id === id);
 	}
 
 	savePalette(newPalette) {
 		this.setState(
 			{ palettes: [...this.state.palettes, newPalette] },
+			this.syncLocalStorage
+		);
+	}
+
+	deletePalette(id) {
+		this.setState(
+			(prevState) => ({
+				palettes: prevState.palettes.filter((palette) => palette.id !== id),
+			}),
 			this.syncLocalStorage
 		);
 	}
@@ -58,7 +68,11 @@ class App extends Component {
 					exact
 					path="/"
 					render={(routeProps) => (
-						<PaletteList palettes={this.state.palettes} {...routeProps} />
+						<PaletteList
+							palettes={this.state.palettes}
+							deletePalette={this.deletePalette}
+							{...routeProps}
+						/>
 					)}
 				/>
 				<Route
@@ -67,7 +81,7 @@ class App extends Component {
 					render={(routeProps) => (
 						<Palette
 							palette={generatePalette(
-								this.findStarterPalette(routeProps.match.params.id)
+								this.findPalette(routeProps.match.params.id)
 							)}
 						/>
 					)}
@@ -78,7 +92,7 @@ class App extends Component {
 					render={(routeProps) => (
 						<SingleColorPalette
 							palette={generatePalette(
-								this.findStarterPalette(routeProps.match.params.paletteId)
+								this.findPalette(routeProps.match.params.paletteId)
 							)}
 							colorId={routeProps.match.params.colorId}
 						/>

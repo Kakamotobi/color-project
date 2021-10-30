@@ -39,7 +39,6 @@ const styles = {
 		marginLeft: "0.5rem",
 		fontSize: "1.5rem",
 	},
-	delete: {},
 	deleteIcon: {
 		width: "20px",
 		height: "20px",
