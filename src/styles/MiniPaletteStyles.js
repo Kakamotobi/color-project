@@ -5,18 +5,19 @@ const styles = {
 		backgroundColor: "#fff",
 		border: "1px solid #000",
 		borderRadius: "5px",
-		"&:hover": {
-			cursor: "pointer",
+		cursor: "pointer",
+		"&:hover svg": {
+			opacity: "1",
 		},
 	},
-	MiniPalette__colors: {
+	colors: {
 		width: "100%",
 		height: "150px",
 		backgroundColor: "#DAE1E4",
 		borderRadius: "5px",
 		overflow: "hidden",
 	},
-	MiniPalette__miniColorBox: {
+	miniColorBox: {
 		width: "20%",
 		height: "25%",
 		margin: "0 auto",
@@ -24,7 +25,7 @@ const styles = {
 		display: "inline-block",
 		position: "relative",
 	},
-	MiniPalette__title: {
+	title: {
 		margin: "0",
 		paddingTop: "0.5rem",
 		display: "flex",
@@ -34,9 +35,23 @@ const styles = {
 		color: "black",
 		fontSize: "1rem",
 	},
-	MiniPalette__emoji: {
+	emoji: {
 		marginLeft: "0.5rem",
 		fontSize: "1.5rem",
+	},
+	delete: {},
+	deleteIcon: {
+		width: "20px",
+		height: "20px",
+		padding: "10px",
+		position: "absolute",
+		right: "0",
+		top: "0",
+		backgroundColor: "#eb3d30",
+		borderBottomLeftRadius: "5px",
+		color: "white",
+		zIndex: "10",
+		opacity: "0",
 	},
 };
 
