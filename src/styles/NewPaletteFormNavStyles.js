@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
+import sizes from "./sizes.js";
 
 const styles = {
 	root: {
@@ -10,9 +11,16 @@ const styles = {
 		"& a": {
 			textDecoration: "none",
 		},
+		[sizes.down("xs")]: {
+			marginRight: "0.5rem",
+		},
 	},
 	button: {
 		margin: "0 0.5rem !important",
+		[sizes.down("xs")]: {
+			margin: "0 0.2rem !important",
+			padding: "0.3rem !important",
+		},
 	},
 };
 

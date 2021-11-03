@@ -1,3 +1,5 @@
+import sizes from "./sizes.js";
+
 const styles = {
 	Navbar: {
 		height: "6vh",
@@ -17,6 +19,9 @@ const styles = {
 		"& a": {
 			color: "#000",
 			textDecoration: "none",
+		},
+		[sizes.down("xs")]: {
+			display: "none",
 		},
 	},
 	slider: {
@@ -40,6 +45,9 @@ const styles = {
 				boxShadow: "none",
 				outline: "none",
 			},
+		[sizes.down("md")]: {
+			width: "150px",
+		},
 	},
 	selectContainer: {
 		marginLeft: "auto",
