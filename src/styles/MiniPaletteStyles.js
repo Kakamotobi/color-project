@@ -47,6 +47,7 @@ const styles = {
 		right: "0",
 		top: "0",
 		backgroundColor: "#eb3d30",
+		borderTopRightRadius: "5px",
 		borderBottomLeftRadius: "5px",
 		color: "white",
 		zIndex: "10",
