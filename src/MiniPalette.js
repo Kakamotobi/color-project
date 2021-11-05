@@ -12,13 +12,13 @@ function MiniPalette(props) {
 		emoji,
 		palettes,
 		goToPalette,
-		deletePalette,
+		openDeleteDialog,
 	} = props;
 
-	const handleDeletePalette = React.useCallback(
+	const handleOpenDeleteDialog = React.useCallback(
 		(evt) => {
 			evt.stopPropagation();
-			deletePalette(id);
+			openDeleteDialog(id);
 		},
 		[palettes]
 	);
@@ -36,7 +36,7 @@ function MiniPalette(props) {
 			<DeleteIcon
 				className={classes.deleteIcon}
 				sx={{ transition: "all 300ms ease-in-out" }}
-				onClick={handleDeletePalette}
+				onClick={handleOpenDeleteDialog}
 			/>
 			<div className={classes.colors}>{miniColorBoxes}</div>
 			<h5 className={classes.title}>
