@@ -27,6 +27,7 @@ function PaletteMetaForm(props) {
 			emoji: emojiObject.native,
 		};
 		props.savePalette(newPalette);
+		setDialogStage("");
 	};
 
 	const handleClosePaletteMetaForm = () => {
