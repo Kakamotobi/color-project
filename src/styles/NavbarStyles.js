@@ -45,7 +45,7 @@ const styles = {
 				boxShadow: "none",
 				outline: "none",
 			},
-		[sizes.down("md")]: {
+		[sizes.down("sm")]: {
 			width: "150px",
 		},
 	},
