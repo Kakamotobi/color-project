@@ -1,7 +1,7 @@
 import React from "react";
 import { withStyles } from "@mui/styles";
-import styles from "./styles/MiniPaletteStyles.js";
 import DeleteIcon from "@mui/icons-material/Delete";
+import styles from "./styles/MiniPaletteStyles.js";
 
 const MiniPalette = React.memo(
 	(props) => {
@@ -11,12 +11,9 @@ const MiniPalette = React.memo(
 			id,
 			colors,
 			emoji,
-			palettes,
 			goToPalette,
 			openDeleteDialog,
 		} = props;
-
-		console.log("Rendering: ", paletteName);
 
 		const handleGoToPalette = () => {
 			goToPalette(id);
@@ -27,7 +24,7 @@ const MiniPalette = React.memo(
 				evt.stopPropagation();
 				openDeleteDialog(id);
 			},
-			[palettes]
+			[id, openDeleteDialog]
 		);
 
 		const miniColorBoxes = colors.map((color) => (

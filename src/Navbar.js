@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import styles from "./styles/NavbarStyles.js"
+import styles from "./styles/NavbarStyles.js";
 
 class Navbar extends Component {
 	constructor(props) {
@@ -38,7 +38,7 @@ class Navbar extends Component {
 
 	render() {
 		const { level, changeLevel, showingAllColors, classes } = this.props;
-		const { format } = this.state;
+		const { format, open } = this.state;
 
 		return (
 			<nav className={classes.Navbar}>
@@ -68,7 +68,7 @@ class Navbar extends Component {
 				</div>
 				<Snackbar
 					anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-					open={this.state.open}
+					open={open}
 					autoHideDuration={3000}
 					message={
 						<span id="message-id">

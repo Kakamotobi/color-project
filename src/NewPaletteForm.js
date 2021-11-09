@@ -66,14 +66,14 @@ function NewPaletteForm(props) {
 		updateColors(arrayMoveImmutable(colors, oldIndex, newIndex));
 	};
 
-	const { classes } = props;
+	const { classes, palettes } = props;
 
 	return (
 		<Box sx={{ display: "flex" }}>
 			<NewPaletteFormNav
 				drawerWidth={drawerWidth}
 				colors={colors}
-				palettes={props.palettes}
+				palettes={palettes}
 				open={open}
 				handleDrawerOpen={handleDrawerOpen}
 				savePalette={savePalette}

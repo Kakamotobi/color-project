@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import Page from "./Page.js";
-import NewPaletteForm from "./NewPaletteForm.js";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import PaletteList from "./PaletteList.js";
 import Palette from "./Palette.js";
 import SingleColorPalette from "./SingleColorPalette.js";
+import NewPaletteForm from "./NewPaletteForm.js";
+import Page from "./Page.js";
 import seedColors from "./seedColors.js";
 import { generatePalette } from "./colorHelpers.js";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 class App extends Component {
 	constructor(props) {
@@ -24,7 +24,7 @@ class App extends Component {
 		this.deletePalette = this.deletePalette.bind(this);
 	}
 
-	// Find starter palette using the id passed in the URL
+	// Find palette using the id passed in the URL
 	findPalette(id) {
 		return this.state.palettes.find((palette) => palette.id === id);
 	}

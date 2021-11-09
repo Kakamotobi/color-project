@@ -23,7 +23,14 @@ function NewPaletteFormNav(props) {
 		togglePaletteMetaFormShowing(false);
 	};
 
-	const { classes } = props;
+	const {
+		classes,
+		open,
+		drawerWidth,
+		palettes,
+		handleDrawerOpen,
+		savePalette,
+	} = props;
 
 	return (
 		<div className={classes.root}>
@@ -31,17 +38,17 @@ function NewPaletteFormNav(props) {
 			<CssBaseline />
 			<AppBar
 				position="fixed"
-				open={props.open}
-				drawerWidth={props.drawerWidth}
+				open={open}
+				drawerWidth={drawerWidth}
 				color="default"
 			>
 				<Toolbar>
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
-						onClick={props.handleDrawerOpen}
+						onClick={handleDrawerOpen}
 						edge="start"
-						sx={{ mr: 2, ...(props.open && { display: "none" }) }}
+						sx={{ mr: 2, ...(open && { display: "none" }) }}
 					>
 						<AddToPhotosIcon />
 					</IconButton>
@@ -70,8 +77,8 @@ function NewPaletteFormNav(props) {
 			</AppBar>
 			{paletteMetaFormShowing && (
 				<PaletteMetaForm
-					palettes={props.palettes}
-					savePalette={props.savePalette}
+					palettes={palettes}
+					savePalette={savePalette}
 					paletteMetaFormShowing={paletteMetaFormShowing}
 					closePaletteMetaForm={closePaletteMetaForm}
 				/>
