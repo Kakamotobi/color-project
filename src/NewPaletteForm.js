@@ -17,11 +17,12 @@ import {
 	Main,
 	DrawerHeader,
 } from "./styles/NewPaletteFormStyles.js";
+import seedColors from "./seedColors.js";
 
 // NewPaletteForm Component
 function NewPaletteForm(props) {
 	const [open, setOpen] = React.useState(true);
-	const [colors, updateColors] = React.useState(props.palettes[0].colors);
+	const [colors, updateColors] = React.useState(seedColors[0].colors);
 
 	const paletteIsFull = colors.length >= props.maxColors;
 
