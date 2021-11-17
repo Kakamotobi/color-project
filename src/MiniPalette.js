@@ -50,7 +50,7 @@ const MiniPalette = React.memo(
 		);
 	},
 	(prevProps, nextProps) => {
-		if (prevProps.openDeleteDialog !== nextProps.openDeleteDialog) {
+		if (prevProps !== nextProps) {
 			return true;
 		}
 		return false;
